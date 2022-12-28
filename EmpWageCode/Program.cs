@@ -4,19 +4,14 @@
     {
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;
-        public const int EMP_RATE_PER_Hrs = 20;
-        public const int NUM_OF_WORKING_DAYS = 2;
-        public const int MAX_HRS_IN_MONTH = 10;
-        public static int ComputeEmpWage()
+        public static int ComputeEmpWage(string company, int empRatePerHrs, int numofWorkingDays, int MaxHoursPerMonth)
         {
-            int totalEmpHrs = 0;
             //variable
-            int empHrs = 0, totaEmpHrs = 0, totaworkingdays = 0;
-            int totaEmpHr = 0;
+            int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
             //computation
-            while (totaEmpHr <= MAX_HRS_IN_MONTH && totaworkingdays < NUM_OF_WORKING_DAYS)
+            while (totalEmpHrs <= MaxHoursPerMonth && totalWorkingDays < numofWorkingDays)
             {
-                totaworkingdays++;
+                totalWorkingDays++;
                 Random random = new Random();
                 int empcheck = random.Next(0, 3);
                 switch (empcheck)
@@ -31,16 +26,18 @@
                         empHrs = 0;
                         break;
                 }
-                totaEmpHr += empHrs;
-                Console.WriteLine("days#:" + totaworkingdays + " + Emp Hrs : " + empHrs);
+                totalEmpHrs += empHrs;
+                Console.WriteLine("days#:" + totalWorkingDays + " + Emp Hrs : " + empHrs);
             }
-            int totalEmpWage = totalEmpHrs * EMP_RATE_PER_Hrs;
-            Console.WriteLine("Total Emp Wage : " + totalEmpWage);
-            return totalEmpHrs;
+            int totalEmpWage = totalEmpHrs * empRatePerHrs;
+            Console.WriteLine("Total Emp Wage for company : " + company + " is: " + totalEmpWage);
+            return totalEmpWage;
         }
         static void Main(String[] args)
         {
-            ComputeEmpWage();
+            ComputeEmpWage("DMart", 20, 2, 10);
+            ComputeEmpWage("Relience", 20, 4, 10);
+            ComputeEmpWage("Flipkart", 20, 5, 10);
         }
     }
 }
